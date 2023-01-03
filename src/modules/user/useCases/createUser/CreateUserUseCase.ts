@@ -1,4 +1,5 @@
-import { IUserRepository } from "modules/user/repositories/interfaces/IUserRepository";
+import { ErrorPrivate } from "../../../../helpers/ErrorPrivate";
+import { IUserRepository } from "../../../../modules/user/repositories/interfaces/IUserRepository";
 import { v4 as uuidV4 } from "uuid";
 
 interface IRequest {
@@ -20,7 +21,7 @@ export class CreateUserUseCase {
     };
     const verifyUser = await this.userRepository.veryfyData(email, cpf);
     if (verifyUser) {
-      throw new Error("Invalid data");
+      throw new ErrorPrivate("Invalid data");
     }
     await this.userRepository.create(user);
   }
