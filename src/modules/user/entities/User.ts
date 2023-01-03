@@ -9,7 +9,7 @@ import {
 @Entity("users")
 export class User {
   @PrimaryColumn()
-  id: string;
+  id?: string;
   @Column({ type: "text" })
   name: string;
   @Column({ type: "text", unique: true })

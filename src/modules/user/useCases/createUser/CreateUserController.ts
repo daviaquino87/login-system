@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { validateCpf } from "../../../../utils/ValidateCpf";
 import { CreateUserUseCase } from "./CreateUserUseCase";
 
 export class CreateUserController {
@@ -8,7 +9,14 @@ export class CreateUserController {
     if (!name || !email || !cpf || !password) {
       throw new Error("All fields must be filled!");
     }
-    await this.createUserUseCase.execute({ name, email, cpf, password });
+    const cpfNoMask = validateCpf(cpf);
+
+    await this.createUserUseCase.execute({
+      name,
+      email,
+      cpf: cpfNoMask,
+      password,
+    });
 
     return response.status(201).send();
   }
