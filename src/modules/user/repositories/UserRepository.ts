@@ -16,4 +16,9 @@ export class UserRepository implements IUserRepository {
 
     await this.repository.save(user);
   }
+
+  async veryfyData(email: string, cpf: string): Promise<User> {
+    const user = await this.repository.findOneBy({ email, cpf });
+    return user;
+  }
 }

@@ -18,6 +18,10 @@ export class CreateUserUseCase {
       email,
       password,
     };
-    this.userRepository.create(user);
+    const verifyUser = await this.userRepository.veryfyData(email, cpf);
+    if (verifyUser) {
+      throw new Error("Invalid data");
+    }
+    await this.userRepository.create(user);
   }
 }

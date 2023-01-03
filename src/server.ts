@@ -1,4 +1,6 @@
 require("dotenv").config();
+import "express-async-errors";
+
 import "reflect-metadata";
 import "./database";
 import { indexRouter } from "./router/index.routes";
