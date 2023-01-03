@@ -1,6 +1,6 @@
 require("dotenv").config();
 import "reflect-metadata";
-import "./database/data-source";
+import "./database";
 import { indexRouter } from "./router/index.routes";
 import express from "express";
 

@@ -1,8 +1,8 @@
 import "dotenv/config";
 import "reflect-metadata";
 import { DataSource } from "typeorm";
-import { User } from "modules/user/entities/User";
-import { WhiteToken } from "modules/user/entities/WhiteTokens";
+import { User } from "../modules/user/entities/User";
+import { WhiteToken } from "../modules/user/entities/WhiteTokens";
 
 const port = Number(process.env.DB_PORT);
 
@@ -16,11 +16,3 @@ export const AppDataSource = new DataSource({
   entities: [User, WhiteToken],
   migrations: ["src/database/migrations/*.{ts,js}"],
 });
-
-AppDataSource.initialize()
-  .then(() => {
-    console.log("Created connection");
-  })
-  .catch((e) => {
-    console.log("Failed to create connection: " + e);
-  });
