@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "tsnd --transpile-only --ignore-watch node_modules --respawn ./src/server.ts",
     "migration:generate": "typeorm-ts-node-commonjs -d ./src/database/data-source.ts migration:generate ./src/database/migrations/default",
+    "migration:run": "typeorm-ts-node-commonjs -d ./src/database/data-source.ts migration:run ",
     "build": "tsc"
   },
   "devDependencies": {
