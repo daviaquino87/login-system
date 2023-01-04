@@ -5,6 +5,7 @@ import { IUserRepository } from "./interfaces/IUserRepository";
 
 export class UserRepository implements IUserRepository {
   private repository = AppDataSource.getRepository(User);
+
   async create({ id, name, email, cpf, password }: IUserDto): Promise<void> {
     const user = this.repository.create({
       id,
@@ -24,5 +25,9 @@ export class UserRepository implements IUserRepository {
 
   async find(email: string): Promise<User> {
     return this.repository.findOneBy({ email });
+  }
+
+  async getProfileInfo(id: string): Promise<User> {
+    return this.repository.findOneBy({ id });
   }
 }

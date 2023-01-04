@@ -5,4 +5,5 @@ export interface IUserRepository {
   create({ id, name, email, cpf, password }: IUserDto): Promise<void>;
   veryfyData(email: string, cpf: string): Promise<User>;
   find(email: string): Promise<User>;
+  getProfileInfo(id: string): Promise<User>;
 }
