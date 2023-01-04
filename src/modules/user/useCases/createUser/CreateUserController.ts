@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { validateCpf } from "../../../../utils/ValidateCpf";
 import { CreateUserUseCase } from "./CreateUserUseCase";
+import bcrypt from "bcrypt";
 
 export class CreateUserController {
   constructor(private createUserUseCase: CreateUserUseCase) {}
@@ -10,12 +11,13 @@ export class CreateUserController {
       throw new Error("All fields must be filled!");
     }
     const cpfNoMask = validateCpf(cpf);
+    const cryptPass = await bcrypt.hash(password, 10);
 
     await this.createUserUseCase.execute({
       name,
       email,
       cpf: cpfNoMask,
-      password,
+      password: cryptPass,
     });
 
     return response.status(201).send();
